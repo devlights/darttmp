@@ -28,4 +28,4 @@ doc/api/
 
 # Project specific
 .task/
-app/
+#app/
