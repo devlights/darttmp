@@ -1,0 +1,9 @@
+
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - command: dart pub get ; dart --disable-analytics ; go install github.com/go-task/task/v3/cmd/task@latest
+
+vscode:
+  extensions:
+    - Dart-Code.dart-code

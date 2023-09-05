@@ -1,0 +1,35 @@
+version: "3"
+
+tasks:
+  default:
+    cmds:
+      - task: run
+  init:
+    cmds:
+      - go mod init app
+      - go get -u github.com/devlights/gomy@latest
+      - echo -e "package main\nfunc main(){\n}" > main.go
+      - task: fmt
+      - task: run
+  fmt:
+    cmds:
+      - goimports -w .
+  vet:
+    cmds:
+      - go vet ./...
+      - staticcheck ./...
+  lint:
+    cmds:
+      - revive -formatter stylish ./...
+  run:
+    cmds:
+      - go mod tidy
+      - go run main.go
+    silent: true
+  version:
+    cmds:
+      - go version
+  clean:
+    cmds:
+      - go clean
+      - rm go.* *.go
