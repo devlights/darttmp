@@ -6,30 +6,22 @@ tasks:
       - task: run
   init:
     cmds:
-      - go mod init app
-      - go get -u github.com/devlights/gomy@latest
-      - echo -e "package main\nfunc main(){\n}" > main.go
-      - task: fmt
-      - task: run
+      - task: clean
+      - dart create app
   fmt:
+    dir: app
     cmds:
-      - goimports -w .
+      - dart format **/*.dart
   vet:
+    dir: app
     cmds:
-      - go vet ./...
-      - staticcheck ./...
-  lint:
-    cmds:
-      - revive -formatter stylish ./...
+      - dart analyze
   run:
+    dir: app
     cmds:
-      - go mod tidy
-      - go run main.go
+      - dart run
     silent: true
-  version:
-    cmds:
-      - go version
   clean:
     cmds:
-      - go clean
-      - rm go.* *.go
+      - rm -rf app
+
